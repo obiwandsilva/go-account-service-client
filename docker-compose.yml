@@ -1,0 +1,14 @@
+version: '2.0'
+
+services:
+    account-service-server:
+        image: wandsilva/account-service-server
+        ports: 
+            - "3000:80"
+    account-service-client:
+        build: .
+        image: wandsilva/account-service-client
+        ports:
+            - "4000:80"
+        environment:
+            ACCOUNT_SERVICE_HOST: "http://account-service-server:80"
