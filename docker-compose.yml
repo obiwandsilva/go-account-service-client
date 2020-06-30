@@ -2,13 +2,13 @@ version: '2.0'
 
 services:
     account-service-server:
-        image: wandsilva/account-service-server
+        image: wandsilva/go-account-service-server:1.0.0
         ports: 
-            - "3000:80"
+            - "3000:3000"
     account-service-client:
         build: .
-        image: wandsilva/account-service-client
+        image: wandsilva/go-account-service-client:1.0.0
         ports:
-            - "4000:80"
+            - "4000:3000"
         environment:
-            ACCOUNT_SERVICE_HOST: "http://account-service-server:80"
+            ACCOUNT_SERVICE_HOST: "http://account-service-server:3000"

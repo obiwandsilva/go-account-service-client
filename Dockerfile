@@ -1,13 +1,12 @@
-FROM golang:1.14.3-alpine3.11
-
-WORKDIR /opt/go-account-service
-
+FROM golang:1.14.3-alpine3.11 AS builder
+WORKDIR /tmp/go-account-service-client
 COPY . .
-
 RUN ["go", "build", "cmd/account-service-client/main.go"]
 
-EXPOSE 80
+FROM builder
+WORKDIR /opt/account-service-client
+COPY --from=builder /tmp/go-account-service-client/main .
+EXPOSE 3000
+CMD [ "./main", "3000" ]
 
-CMD [ "./main", "80" ]
-
-# It's needed to pass the env var ACCOUNT_SERVICE_HOST when running the container
+# Set the env var ACCOUNT_SERVICE_HOST when running a container
