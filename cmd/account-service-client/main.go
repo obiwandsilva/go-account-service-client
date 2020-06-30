@@ -7,5 +7,6 @@ import (
 )
 
 func main() {
-	application.Run(os.Args[1])
+	port := os.Args[1]
+	application.Run(port)
 }
