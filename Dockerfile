@@ -3,7 +3,7 @@ WORKDIR /tmp/go-account-service-client
 COPY . .
 RUN ["go", "build", "cmd/account-service-client/main.go"]
 
-FROM builder
+FROM alpine:3.11
 WORKDIR /opt/account-service-client
 COPY --from=builder /tmp/go-account-service-client/main .
 EXPOSE 3000
