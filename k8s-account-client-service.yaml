@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: account-server-service
+    labels:
+        type: ClusterIP
+spec:
+    type: ClusterIP
+    selector:
+        app: account-server
+    ports:
+        -   port: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: account-client-service
+    labels:
+        type: ClusterIP
+spec:
+    type: ClusterIP
+    selector:
+        app: account-client
+        account-service-instance: client
+    ports:
+        -   port: 3000
